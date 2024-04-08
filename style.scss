@@ -9,7 +9,26 @@
 }
 
 .pokemons {
+  display: flex;
+  flex-direction: column;
+  .activePokemon {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+  }
   .battleDom {
+    h2 {
+      text-align: center;
+    }
+  }
+  .pokemon-card {
+    width: 45%;
+    ul {
+      img {
+        height: 14px;
+        width: 14px;
+      }
+    }
   }
 }
 

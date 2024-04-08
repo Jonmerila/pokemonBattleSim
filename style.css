@@ -1,3 +1,23 @@
 * {
   border: 1px solid black;
+}
+
+.pokemons {
+  display: flex;
+  flex-direction: column;
+}
+.pokemons .activePokemon {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+}
+.pokemons .battleDom h2 {
+  text-align: center;
+}
+.pokemons .pokemon-card {
+  width: 45%;
+}
+.pokemons .pokemon-card ul img {
+  height: 14px;
+  width: 14px;
 }/*# sourceMappingURL=style.css.map */
