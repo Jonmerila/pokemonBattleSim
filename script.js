@@ -9,9 +9,13 @@ let startBattle = document.createElement("button");
 startBattle.innerText = "Start Battle!";
 startBattle.classList.add("startBattle");
 
-const pokeSelect = document.querySelector("#selOne");
+let compareStatsBtn = document.createElement("button");
+compareStatsBtn.classList.add("comparePokemon");
+compareStatsBtn.innerText = "Compare Pokémon";
 
 let selectedPokemons = [];
+
+const pokeSelect = document.querySelector("#selOne");
 
 class Pokemon {
   constructor(
@@ -33,8 +37,51 @@ class Pokemon {
     this.move = move;
     this.currentHp = currentHp;
   }
+  comparePoke(poke1, poke2) {
+    let angles = [];
+    Object.keys(this.stats).forEach((key) => {
+      if (key !== "currentHp") {
+        // let li = document.createElement("li");
+        if (poke2) {
+          //   let content = `base ${key}: ${this.stats[key]}`;
+
+          if (
+            this.stats[key] > poke2.stats[key] &&
+            this.stats[key] === poke1.stats[key]
+          ) {
+            angles.push(`<img src="./icons/angleup.svg">`);
+            //   content += ` <img src="./icons/angleup.svg">`;
+          } else if (
+            this.stats[key] === poke2.stats[key] &&
+            this.stats[key] > poke1.stats[key]
+          ) {
+            angles.push(`<img src="./icons/angleup.svg">`);
+            //   content += ` <img src="./icons/angleup.svg">`;
+          } else if (this.stats[key] < poke1.stats[key]) {
+            angles.push(`<img src="./icons/angledown.svg">`);
+            //   content += ` <img src="./icons/angledown.svg">`;
+          } else {
+            angles.push(`<img src="./icons/angledown.svg">`);
+            //   content += ` <img src="./icons/angledown.svg">`;
+          }
+
+          // li.innerHTML = content;
+          // } else {
+          //   li.innerHTML = `${key}: ${this.stats[key]}`;
+        }
+        // statList.append(li);
+      }
+    });
+    console.log(angles);
+    return angles;
+  }
 }
 
+/*
+    let poke1 = selectedPokemons[0];
+    let poke2 = selectedPokemons[1];
+
+*/
 const comparePokemons = (poke1, poke2, currentStat) => {
   //   let pokeone = poke1.stat[currentStat];
   //   let poketwo = poke2.stat[currentStat];
@@ -59,11 +106,11 @@ const loadPokemons = () => {
   if (selectedPokemons.length > 2) {
     selectedPokemons.shift();
   }
-  console.log(selectedPokemons);
   let poke1 = selectedPokemons[0];
   let poke2 = selectedPokemons[1];
+  console.log(selectedPokemons);
+
   selectedPokemons.forEach((pokemon, index) => {
-    //compare stats, how do indentify first pokemon?
     let pokeCard = document.createElement("div");
     pokeCard.classList.add("pokemon-card");
 
@@ -83,12 +130,22 @@ const loadPokemons = () => {
     pokestats.classList.add("pokeStats");
     let statpara = (document.createElement("p").innerText = "Stats: ");
     let statList = document.createElement("ul");
+    statList.classList.add("statList");
 
     let poketype = document.createElement("p");
     let allTypes = pokemon.typing
       .map((typeObj) => typeObj.type.name)
       .join(", ");
     poketype.innerHTML = `Type(s): ${allTypes}`;
+    let statArray1;
+    let statArray2;
+
+    compareStatsBtn.addEventListener("click", () => {
+      let poke1 = selectedPokemons[0];
+      let poke2 = selectedPokemons[1];
+      statArray1 = poke1.comparePoke(poke1, poke2);
+      statArray2 = poke2.comparePoke(poke1, poke2);
+    });
 
     Object.keys(pokemon.stats).forEach((key) => {
       let li = document.createElement("li");
@@ -98,16 +155,20 @@ const loadPokemons = () => {
             pokemon.stats[key] > poke2.stats[key] &&
             pokemon.stats[key] === poke1.stats[key]
           ) {
-            li.innerHTML = `base ${key}: ${pokemon.stats[key]} <img src="./icons/angleup.svg">`;
+            li.innerHTML = `base ${key}: ${pokemon.stats[key]}`;
+            // li.innerHTML += `<img src="./icons/angleup.svg">`;
           } else if (
             pokemon.stats[key] === poke2.stats[key] &&
             pokemon.stats[key] > poke1.stats[key]
           ) {
-            li.innerHTML = `base ${key}: ${pokemon.stats[key]} <img src="./icons/angleup.svg">`;
+            li.innerHTML = `base ${key}: ${pokemon.stats[key]}`;
+            // li.innerHTML += `<img src="./icons/angleup.svg">`;
           } else if (pokemon.stats[key] < poke1.stats[key]) {
-            li.innerHTML = `base ${key}: ${pokemon.stats[key]} <img src="./icons/angledown.svg">`;
+            li.innerHTML = `base ${key}: ${pokemon.stats[key]}`;
+            // <img src="./icons/angledown.svg">
           } else {
-            li.innerHTML = `base ${key}: ${pokemon.stats[key]} <img src="./icons/angledown.svg">`;
+            li.innerHTML = `base ${key}: ${pokemon.stats[key]} `;
+            // <img src="./icons/angledown.svg">
           }
         } else {
           li.innerHTML = `${key}: ${pokemon.stats[key]}`;
@@ -123,8 +184,7 @@ const loadPokemons = () => {
   });
 
   if (selectedPokemons.length > 1) {
-    pokeButtons.append(startBattle);
-    comparePokemons();
+    pokeButtons.append(startBattle, compareStatsBtn);
   }
 };
 
@@ -231,7 +291,6 @@ const flipCoin = () => {
 const battleStart = () => {
   let poke1 = selectedPokemons[0];
   let poke2 = selectedPokemons[1];
-
   let attacker, defender;
   if (poke1.stats.speed > poke2.stats.speed) {
     attacker = poke1;
@@ -262,6 +321,7 @@ startBattle.addEventListener("click", () => {
 });
 
 getAllPokemons();
+
 // if (
 //   poke2 &&
 //   pokemon.stats[key] > poke2.stats[key] &&
