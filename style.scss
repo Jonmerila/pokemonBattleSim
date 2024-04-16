@@ -1,29 +1,160 @@
-* {
-  border: 1px solid black;
+@font-face {
+  font-family: "Pokemon Pixel Font Regular";
+  src: url("https://www.fontsaddict.com/fontface/pokemon-pixel-font-regular.ttf");
 }
 
 .pokeTitle {
+  img {
+    height: 180px;
+  }
 }
 
 .pokeSelection {
+  height: 40px;
+  display: flex;
+  margin: 12px;
+  gap: 12px;
+  button {
+    background-color: rgb(83, 120, 207);
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
+}
+
+.typings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  p {
+    color: black;
+    border-radius: 12px;
+    text-align: center;
+    height: 26px;
+    box-sizing: border-box;
+    padding: 4px;
+  }
+}
+
+.tackle .pokemon {
+}
+
+@keyframes LefttackleAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes RighttackleAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typing {
+  animation: typing 3s steps(28, end);
+}
+
+progress {
+  border: 1px solid black;
+}
+
+progress[value] {
+  border-radius: 12px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: white;
+
+  border-radius: 12px;
+}
+
+progress::-webkit-progress-value {
+  background-color: rgb(42, 253, 42);
+  border-radius: 12px;
 }
 
 .pokemons {
+  border: 2px solid rgb(83, 120, 207);
   display: flex;
   flex-direction: column;
+  align-items: center;
   .activePokemon {
+    width: 100%;
+    margin: 40px 20px;
+
     display: flex;
+
     gap: 18px;
     justify-content: center;
   }
   .battleDom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    img {
+      align-self: center;
+      height: 75px;
+      width: 315px;
+    }
     h2 {
       text-align: center;
     }
+    .battleText {
+      display: inline;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: "Pixelify Sans", sans-serif;
+      font-size: 24px;
+      animation: typing 3s steps(28, end);
+    }
   }
   .pokemon-card {
+    border: 2px solid blue;
+    border-radius: 4px;
+    // border: 1px solid rgb(83, 120, 207);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 45%;
+    .battleMode {
+      width: 100%;
+    }
+
+    img {
+      height: 120px;
+      width: 120px;
+      position: relative;
+    }
     ul {
+      li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
       img {
         height: 14px;
         width: 14px;
@@ -32,5 +163,58 @@
   }
 }
 
-.pokeButtons {
+.size {
+  display: flex;
+  gap: 20px;
 }
+.pokemon-card .size p img {
+  height: 14px;
+  width: 14px;
+}
+
+.activePokemon.battleMode {
+  flex-direction: column;
+}
+
+.pokemon-card:nth-child(2).battleMode {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 41%;
+  margin-left: 20px;
+}
+.pokemon-card:first-child.battleMode {
+  align-self: flex-end;
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+  margin-right: 20px;
+}
+
+.pokeHp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-card:nth-child(2) {
+  border: 2px solid red;
+}
+.pokeButtons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+
+  button {
+    height: 48px;
+    background-color: rgb(83, 120, 207);
+    color: white;
+    border: none;
+    border-radius: 8px;
+  }
+}
+
+// .battleMode {
+//   background: blue !important;
+// }
