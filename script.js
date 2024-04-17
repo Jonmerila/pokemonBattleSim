@@ -47,7 +47,7 @@ const compareSize = (poke1, poke2, size) => {
       poke2[size] += ` <img src="./icons/angleup.svg">`;
       imgAdd2 = true;
     }
-  } else {
+  } else if (poke1[size] === poke2[size]) {
     if (!imgAdd1) {
       poke1[size] += ` <img src="./icons/angleequal.svg">`;
       imgAdd1 = true;
@@ -86,6 +86,8 @@ class Pokemon {
 
     console.log("Entering condition:", poke1.height > poke2.height);
 
+    let comparedpokeHeight = compareSize(poke1, poke2, "height");
+    let comparedPokeweight = compareSize(poke1, poke2, "weight");
     // Ta in en poke och jämför med den andra och ifall den har större/mindre, ge en angle svg
     Object.keys(poke1.stats).forEach((key) => {
       console.log(newPoke1);
@@ -111,16 +113,16 @@ class Pokemon {
       console.log("First stats: " + firstStats);
       console.log("second stats: " + secondStats);
       console.log(poke1);
+
       if (firstStats > secondStats) {
         battleText.innerHTML = `${poke1.name} has higher stats than ${poke2.name}.`;
       } else if (firstStats < secondStats) {
         battleText.innerHTML = `${poke2.name} has higher stats than ${poke1.name}.`;
-      } else {
+      } else if (firstStats === secondStats) {
         battleText.innerHTML = `${poke1.name} has the same stats as ${poke2.name}.`;
       }
     });
-    let comparedpokeHeight = compareSize(poke1, poke2, "height");
-    let comparedPokeweight = compareSize(poke1, poke2, "weight");
+
     console.log("Final stats: ");
     console.log(ul1);
 
@@ -432,7 +434,7 @@ const criticalHit = () => {
   }
   return false;
 };
-
+``;
 compareStatsBtn.addEventListener("click", () => {
   Pokemon.comparePoke(newPoke1, newPoke2);
 });
@@ -452,8 +454,9 @@ const singleAttack = (attacker, defender) => {
   atkPoke.innerText = attacker.name;
   atkPoke.style.color = "blue";
   defender.currentHp -= damage;
+  console.log(attacker);
 
-  battleText.innerHTML += `<strong>${attacker.name}</strong> Dealt <strong>${damage}</strong> damage to <strong>${defender.name}</strong>!`;
+  battleText.innerHTML += `<strong>${attacker.name}</strong> used ${attacker.move.name} and dealt <strong>${damage}</strong> damage to <strong>${defender.name}</strong>!`;
 
   void battleText.offsetWidth;
   battleText.classList.add("typing");
