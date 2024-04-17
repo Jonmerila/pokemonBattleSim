@@ -86,57 +86,17 @@ class Pokemon {
 
     console.log("Entering condition:", poke1.height > poke2.height);
 
-    // let imgAdd1 = false;
-    // let imgAdd2 = false;
-    // if (poke1.height > poke2.height) {
-    //     firstStats++;
-    //   if (!imgAdd1) {
-    //     poke1.height += ` <img src="./icons/angleup.svg">`;
-    //     imgAdd1 = true;
-    //     console.log(imgAdd1);
-    //     console.log(poke1.height);
-    //   }
-    //   if (!imgAdd2) {
-    //     poke2.height += ` <img src="./icons/angledown.svg">`;
-    //     imgAdd2 = true;
-    //   }
-    // } else if (poke1.height < poke2.height) {
-    //     secondStats++;
-    //   if (!imgAdd1) {
-    //     poke1.height += ` <img src="./icons/angledown.svg">`;
-    //     imgAdd1 = true;
-    //   }
-    //   if (!imgAdd2) {
-    //     poke2.height += ` <img src="./icons/angleup.svg">`;
-    //     imgAdd2 = true;
-    //   }
-    // } else {
-    //   if (!imgAdd1) {
-    //     poke1.height += ` <img src="./icons/angleequal.svg">`;
-    //     imgAdd1 = true;
-    //   }
-    //   if (!imgAdd2) {
-    //     poke2.height += ` <img src="./icons/angleequal.svg">`;
-    //     imgAdd2 = true;
-    //   }
-    // }
     // Ta in en poke och jämför med den andra och ifall den har större/mindre, ge en angle svg
     Object.keys(poke1.stats).forEach((key) => {
       console.log(newPoke1);
       let li1 = document.createElement("li");
       let li2 = document.createElement("li");
-
-      if (
-        // && this.stats[key] === poke1.stats[key]
-        poke1.stats[key] > poke2.stats[key]
-      ) {
+      // _______________________________________________ Ivysaur & wartorle, ivysaur weight o height visar inte higher eller lower.
+      if (poke1.stats[key] > poke2.stats[key]) {
         li1.innerHTML = `${key}: ${poke1.stats[key]} <img src="./icons/angleup.svg">`;
         li2.innerHTML = `${key}: ${poke2.stats[key]} <img src="./icons/angledown.svg">`;
         firstStats++;
-      } else if (
-        // && this.stats[key] === poke1.stats[key]
-        poke1.stats[key] < poke2.stats[key]
-      ) {
+      } else if (poke1.stats[key] < poke2.stats[key]) {
         console.log("lower");
         li1.innerHTML = `${key}: ${poke1.stats[key]} <img src="./icons/angledown.svg">`;
         li2.innerHTML = `${key}: ${poke2.stats[key]} <img src="./icons/angleup.svg">`;
@@ -146,39 +106,6 @@ class Pokemon {
         li2.innerHTML = `${key}: ${poke2.stats[key]} <img src="./icons/angleequal.svg">`;
       }
 
-      //   if (poke1.height > poke2.height) {
-      //     poke1.height += ` <img src="./icons/angleup.svg">`;
-      //     poke2.height += ` <img src="./icons/angledown.svg">`;
-      //   } else if (poke1.height < poke2.height) {
-      //     poke1.height += ` <img src="./icons/angledown.svg">`;
-
-      //     poke2.height += ` <img src="./icons/angleup.svg">`;
-      //   } else {
-      //     poke1.height += ` <img src="./icons/angleequal.svg">`;
-
-      //     poke2.height += ` <img src="./icons/angleequal.svg">`;
-      //   }
-      //   if (!poke1.height.toString().includes("<img>")) {
-      //   if (!poke2.height.toString().includes("<img>")) {
-      //   if (!poke1.height.toString().includes("<img>")) {
-      // }
-      //  if (!poke2.height.toString().includes("<img>")) {
-      // }
-      // if (!poke1.height.toString().includes("<img>")) {
-      // }
-      // if (!poke2.height.toString().includes("<img>")) {
-      // }
-      //   if (poke1.height > poke2.height) {
-      //     poke1.height = `${poke1.height} <img src="./icons/angleup.svg">`;
-      //     poke2.height = `${poke2.height} <img src="./icons/angledown.svg">`;
-      //   } else if (poke1.height < poke2.height) {
-      //     poke1.height = `${poke1.height} <img src="./icons/angledown.svg">`;
-      //     poke2.height = `${poke2.height} <img src="./icons/angleup.svg">`;
-      //   } else {
-      //     poke1.height = `${poke1.height} <img src="./icons/angleequal.svg">`;
-      //     poke2.height = `${poke2.height} <img src="./icons/angleequal.svg">`;
-      //   }
-
       ul1.append(li1);
       ul2.append(li2);
       console.log("First stats: " + firstStats);
@@ -186,81 +113,23 @@ class Pokemon {
       console.log(poke1);
       if (firstStats > secondStats) {
         battleText.innerHTML = `${poke1.name} has higher stats than ${poke2.name}.`;
-      } else {
+      } else if (firstStats < secondStats) {
         battleText.innerHTML = `${poke2.name} has higher stats than ${poke1.name}.`;
+      } else {
+        battleText.innerHTML = `${poke1.name} has the same stats as ${poke2.name}.`;
       }
     });
     let comparedpokeHeight = compareSize(poke1, poke2, "height");
     let comparedPokeweight = compareSize(poke1, poke2, "weight");
     console.log("Final stats: ");
     console.log(ul1);
-    // statList = ul1;
+
     console.log(statList);
     let newUl = ul1.cloneNode(true);
     console.log(newUl);
     loadPokemons(ul1, ul2);
   }
 }
-
-// Object.keys(poke2.stats).forEach((key) => {
-//   let li2 = document.createElement("li");
-//   if (
-//     this.stats[key] > poke1.stats[key] &&
-//     this.stats[key] === poke2.stats[key]
-//   ) {
-//     li2.innerHTML = `${key}: ${this.stats[key]} <img src="./icons/angleup.svg">`;
-//   } else if (
-//     this.stats[key] < poke1.stats[key] &&
-//     this.stats[key] === poke2.stats[key]
-//   ) {
-//     console.log("lower");
-//     li2.innerHTML = `${key}: ${this.stats[key]} <img src="./icons/angledown.svg">`;
-//   }
-//   ul2.append(li2);
-// });
-
-// let angles = [];
-// Object.keys(this.stats).forEach((key) => {
-//   if (key !== "currentHp") {
-//     // let li = document.createElement("li");
-//     if (poke2) {
-//       //   let content = `base ${key}: ${this.stats[key]}`;
-
-//       if (
-//         this.stats[key] > poke2.stats[key] &&
-//         this.stats[key] === poke1.stats[key]
-//       ) {
-//         angles.push(`<img src="./icons/angleup.svg">`);
-//         //   content += ` <img src="./icons/angleup.svg">`;
-//       } else if (
-//         this.stats[key] === poke2.stats[key] &&
-//         this.stats[key] > poke1.stats[key]
-//       ) {
-//         angles.push(`<img src="./icons/angleup.svg">`);
-//         //   content += ` <img src="./icons/angleup.svg">`;
-//       } else if (this.stats[key] < poke1.stats[key]) {
-//         angles.push(`<img src="./icons/angledown.svg">`);
-//         //   content += ` <img src="./icons/angledown.svg">`;
-//       } else {
-//         angles.push(`<img src="./icons/angledown.svg">`);
-//         //   content += ` <img src="./icons/angledown.svg">`;
-//       }
-
-//       // li.innerHTML = content;
-//       // } else {
-//       //   li.innerHTML = `${key}: ${this.stats[key]}`;
-//     }
-//     // statList.append(li);
-//   }
-// });
-// console.log(angles);
-// return angles;
-
-/*
-    let poke1 = selectedPokemons[0];
-    let poke2 = selectedPokemons[1];
-
-*/
 
 const ulHasValues = (ulElem) => {
   let liElem = ulElem.querySelectorAll("li");
@@ -424,19 +293,15 @@ const loadPokemons = (newUl1, newUl2) => {
                 pokemon.stats[key] === poke1.stats[key]
               ) {
                 li.innerHTML = `base ${key}: ${pokemon.stats[key]}`;
-                // li.innerHTML += `<img src="./icons/angleup.svg">`;
               } else if (
                 pokemon.stats[key] === poke2.stats[key] &&
                 pokemon.stats[key] > poke1.stats[key]
               ) {
                 li.innerHTML = `base ${key}: ${pokemon.stats[key]}`;
-                // li.innerHTML += `<img src="./icons/angleup.svg">`;
               } else if (pokemon.stats[key] < poke1.stats[key]) {
                 li.innerHTML = `base ${key}: ${pokemon.stats[key]}`;
-                // <img src="./icons/angledown.svg">
               } else {
                 li.innerHTML = `base ${key}: ${pokemon.stats[key]} `;
-                // <img src="./icons/angledown.svg">
               }
             } else {
               li.innerHTML = `${key}: ${pokemon.stats[key]}`;
@@ -463,22 +328,6 @@ const loadPokemons = (newUl1, newUl2) => {
       pokeSprite.append(img);
       activePoke.append(pokeCard);
     }
-
-    // let allTypes = pokemon.typing
-    //   .map((typeObj) => typeObj.type.name)
-    //   .join(", ");
-
-    // poketype.innerHTML = `Type(s): ${allTypes}`;
-    let statArray1;
-    let statArray2;
-
-    // Object.keys(pokemon.stats).forEach((key) => {
-    //     let li = document.createElement("li");
-    //     if(key !== "currentHp"){
-
-    //         li.innerHTML = `base ${key}: ${pokemon.stats[key]}`;
-    //     }
-    // })
   });
 
   if (selectedPokemons.length > 1) {
@@ -561,7 +410,6 @@ const getAllPokemons = async () => {
         newPoke1
       );
     } else if (selectedPokemons.length === 1) {
-      //Om längd är två, ersätt 1 med två, och två med nya pokemon "{...pokemon2}"
       newPoke2 = await getPokemonData(
         `https://pokeapi.co/api/v2/pokemon/${pokeSelect.value}`,
         newPoke2
@@ -576,11 +424,6 @@ const getAllPokemons = async () => {
     console.log(newPoke1, newPoke2);
   });
 };
-
-/*
-Attackerande Pokemon (röd) - Försvarande Pokemon (blå)
-(Attack+Special Attack) - (Defense+Special defense) * 0.8 = Skada
-*/
 
 const criticalHit = () => {
   let roll = Math.floor(Math.random() * 101);
@@ -621,7 +464,6 @@ const singleAttack = (attacker, defender) => {
       battleText.innerHTML = "BATTLE OVER! " + defender.name + " has fainted!";
       startBattle.disabled = false;
       compareStatsBtn.disabled = false;
-      //   cardTwo.classList.remove("battleMode");
     }, 2000);
 
     loadPokemons(ul1, ul2);
@@ -641,8 +483,6 @@ const pokemonAttack = (attacker, defender) => {
 
   return finalDamage;
 };
-
-//114 93
 
 const flipCoin = () => {
   let flip = Math.floor(Math.random() * 101);
@@ -703,16 +543,11 @@ startBattle.addEventListener("click", () => {
   });
   activePoke.classList.add("battleMode");
   console.log(cardTwo.classList);
-
-  //Gör så att klassen lägs till i loadpokemon, dem görs om på nytt varje gång loadpokemons() körs.
   startBattle.disabled = true;
   compareStatsBtn.disabled = true;
   console.log(selectedPokemons);
 
   const url = newPoke2.avatar;
-  //   const parts = url.split("/");
-  //   const secondParts = parts[parts.length - 1]
-  //   const pokeNum = secondParts.split(".")[0];
   const parts = url.split("/");
   const secondLastPart = parts[parts.length - 2]; // Second last part of the URL
   const isPokemonShiny = secondLastPart === "shiny";
@@ -734,7 +569,6 @@ startBattle.addEventListener("click", () => {
     if (index === 0) {
       console.log("pokemon move added..");
       li1.innerHTML = `<p>Move: ${selectedPokemons[index].move.name} </p>`;
-      //   statList.append(card);
       ul1.append(li1);
       console.log(ul1);
     } else {
@@ -746,35 +580,9 @@ startBattle.addEventListener("click", () => {
     console.log(ul1, ul2);
     loadPokemons(ul1, ul2);
   });
-  //   loadPokemons();
   battleStart();
 });
 
 getAllPokemons();
-
-// if (
-//   poke2 &&
-//   pokemon.stats[key] > poke2.stats[key] &&
-//   pokemon.stats[key] === poke1.stats[key]
-// ) {
-//   li.innerHTML = `base ${key}: ${pokemon.stats[key]} <img src="./icons/angleup.svg">`;
-// } else {
-//   li.innerHTML = `base ${key}: ${pokemon.stats[key]} `;
-// }
-
-//   if (poke1.stats.speed > poke2.stats.speed) {
-//     console.log(`${poke1.name}(Poke 1) attacks first.`);
-//     poke2.currentHp -= pokemonAttack(poke1, poke2);
-//   } else if (poke2.stats.speed > poke1.stats.speed) {
-//     console.log(`${poke2.name}(Poke 2) attacks first.`);
-//     poke1.currentHp -= pokemonAttack(poke2, poke1);
-//   } else if (flipCoin()) {
-//     poke2.currentHp -= pokemonAttack(poke1, poke2);
-//     console.log("Flipping coin..");
-//     console.log(`${poke1.name}(Poke 1) attacks first.`);
-//   } else {
-//     console.log("Flipping coin..");
-//     poke1.currentHp -= pokemonAttack(poke2, poke1);
-//     console.log(`${poke2.name}(Poke 2) attacks first.`);
-//   }
-//   console.log(selectedPokemons);
+//783 rader innan comment deletion
+//586 rader efter comment deletion

@@ -2,6 +2,10 @@
   font-family: "Pokemon Pixel Font Regular";
   src: url("https://www.fontsaddict.com/fontface/pokemon-pixel-font-regular.ttf");
 }
+html {
+  width: 100%;
+}
+
 .pokeTitle img {
   height: 180px;
 }
@@ -91,6 +95,7 @@ progress::-webkit-progress-value {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 .pokemons .activePokemon {
   width: 100%;
